@@ -1,0 +1,21 @@
+
+syntax = "proto3";
+
+message data {
+    string adr = 1;
+    string param = 2;
+}
+
+message html {
+    enum Result{
+        OK = 0;
+        NOTADR = 1;
+        NOTDATA = 2;
+    }
+    string data = 1;
+    Result res = 2;
+}
+
+service Data {
+    rpc gen(data) returns (html) {}
+}

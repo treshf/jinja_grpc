@@ -9,7 +9,7 @@ stub = test_pb2_grpc.DataStub(channel)
 
 # запрос за md5
 # data = input()
-to_ = test_pb2.data(adr="dsf", param="iuo")
+to_ = test_pb2.data(adr="dsf", params={"asfa": "asfaf", "ghrh": "dfhdh"})
 res = stub.gen(to_)
 print(res.data, res.res)
 channel.close()

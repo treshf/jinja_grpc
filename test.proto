@@ -3,7 +3,7 @@ syntax = "proto3";
 
 message data {
     string adr = 1;
-    string param = 2;
+    map<string, string> params = 2;
 }
 
 message html {
@@ -12,7 +12,7 @@ message html {
         NOTADR = 1;
         NOTDATA = 2;
     }
-    string data = 1;
+    repeated string data = 1;
     Result res = 2;
 }
 

@@ -17,10 +17,7 @@ class TestServicer(test_pb2_grpc.DataServicer):
         if os.path.exists(request.adr):
             try:
                 template = env.get_template(request.adr)
-                buffer = request.data.split(';')
-                # try:
-                buf_dict = {var.split('=')[0]: var.split('=')[1] for var in buffer}
-                response.data = template.render(buf_dict)
+                response.data = template.render(request.params)
             except:
                 response.res = test_pb2.html.NOTDATA
             else:

@@ -7,21 +7,17 @@ import test_pb2_grpc
 from jinja2 import Environment, FileSystemLoader
 import os
 
-env = Environment(loader=FileSystemLoader('foopkg/templates'))
+env = Environment(loader=FileSystemLoader('./'))
 
 
 class TestServicer(test_pb2_grpc.DataServicer):
     def gen(self, request, context):
-        print(request.param, request.adr)
+        print(request.params, request.adr)
         response = test_pb2.html()
         if os.path.exists(request.adr):
-            try:
-                template = env.get_template(request.adr)
-                response.data = template.render(request.params)
-            except:
-                response.res = test_pb2.html.NOTDATA
-            else:
-                response.res = test_pb2.html.OK
+            template = env.get_template(request.adr)
+            response.data.append(template.render(i=request.params))
+            response.res = test_pb2.html.OK
         else:
             response.res = test_pb2.html.NOTADR
         context.set_code(grpc.StatusCode.OK)
